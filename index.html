@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -278,6 +278,33 @@ footer { text-align:center; margin-top:20px; font-size:10px; color:var(--t3); li
 .add-pos-cancel:hover { border-color:var(--b2); color:var(--t1); }
 .add-pos-status { font-size:11px; color:var(--red); }
 
+/* Login */
+[hidden] { display:none !important; }
+.login-screen { min-height:100vh; min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:24px 16px; }
+.login-card { width:100%; max-width:360px; background:var(--s1); border:1px solid var(--b1); border-radius:14px; padding:32px 26px 26px; box-shadow:0 12px 40px var(--shadow); display:flex; flex-direction:column; }
+.login-title { font-size:20px; font-weight:800; letter-spacing:-0.4px; color:var(--t1); text-align:center; }
+.login-sub { font-size:12px; color:var(--t3); text-align:center; margin:6px 0 24px; }
+.login-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--t3); margin-bottom:6px; }
+.login-input { width:100%; min-height:44px; background:var(--s3); border:1px solid var(--b1); border-radius:8px; padding:10px 12px; color:var(--t1); font-size:16px; font-family:inherit; outline:none; margin-bottom:16px; transition:border-color .15s; }
+.login-input:focus { border-color:var(--blue); background:var(--s2); }
+.login-btn { min-height:44px; margin-top:4px; background:var(--blue); border:none; border-radius:8px; color:#fff; font-size:15px; font-weight:700; font-family:inherit; cursor:pointer; transition:opacity .15s; }
+.login-btn:hover { opacity:.88; } .login-btn:disabled { opacity:.5; cursor:default; }
+.login-error { min-height:18px; margin-top:12px; font-size:12px; color:var(--red); text-align:center; }
+.login-wait { font-size:12px; color:var(--t3); }
+.logout-btn { padding:5px 13px; background:var(--s3); border:1px solid var(--b1); border-radius:20px; cursor:pointer; font-family:inherit; font-size:11px; font-weight:700; color:var(--t2); transition:all .2s; }
+.logout-btn:hover { border-color:var(--red); color:var(--red); }
+
+/* Import */
+.import-body { border-top:1px solid var(--b1); padding:16px 20px 18px; }
+.import-help { font-size:12px; color:var(--t2); line-height:1.5; margin-bottom:10px; }
+.import-input { width:100%; background:var(--s3); border:1px solid var(--b1); border-radius:8px; padding:10px 12px; color:var(--t1); font-size:12px; font-family:ui-monospace,Menlo,monospace; resize:vertical; outline:none; min-height:90px; }
+.import-input:focus { border-color:var(--blue); background:var(--s2); }
+.import-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:10px; }
+.import-btn { padding:8px 18px; background:var(--blue); border:none; border-radius:8px; color:#fff; font-size:12px; font-weight:700; font-family:inherit; cursor:pointer; }
+.import-btn:hover { opacity:.88; }
+.import-status { font-size:12px; color:var(--t2); }
+.import-status.g { color:var(--green); } .import-status.r { color:var(--red); }
+
 @media (max-width:960px) {
   .nw-grid { grid-template-columns:1fr 1fr; }
   .nw-donut { grid-column:span 2; }
@@ -298,13 +325,66 @@ footer { text-align:center; margin-top:20px; font-size:10px; color:var(--t3); li
   .re-total-card { grid-column:unset; }
   .pm-grid { grid-template-columns:1fr; }
 }
+
+/* Phone */
+@media (max-width:600px) {
+  html, body { overflow-x:hidden; }
+  .app { padding:16px 16px 48px; }
+  header { flex-direction:column; align-items:stretch; margin-bottom:18px; }
+  .header-right { gap:8px; }
+  .curr-toggle, .theme-toggle, .logout-btn, .live-pill, .eur-pill { min-height:44px; display:inline-flex; align-items:center; }
+  .logout-btn { margin-left:auto; padding:0 16px; font-size:12px; }
+  .curr-toggle { padding:0 16px; }
+  .theme-toggle { padding:0 13px; }
+  .nw-card, .nw-donut { padding:16px 18px; }
+  .nw-val { font-size:26px; } .nw-card.hero .nw-val { font-size:30px; }
+  .sec-hdr { padding:12px 16px; min-height:52px; gap:8px; }
+  .sec-hdr-l { flex-wrap:wrap; min-width:0; }
+  .sec-total { font-size:14px; }
+  .add-pos-btn { min-height:44px; padding:0 14px; font-size:11px; }
+  .cash-col, .inv-col, .re-cell, .pm-col { padding-left:16px; padding-right:16px; }
+  .cash-row { min-height:44px; }
+  .cash-input { width:150px; }
+  input, textarea, select { font-size:16px !important; }
+  .cash-input, .inv-qty-input, .inv-entry-input, .pm-qty-input, .pm-entry-input, .add-pos-input, .re-input { min-height:44px; padding-top:8px; padding-bottom:8px; }
+  .inv-qty-input, .inv-entry-input { width:auto; flex:1; min-width:0; }
+  .inv-r1 { min-height:44px; }
+  .inv-r2, .inv-r3 { flex-wrap:wrap; }
+  .unit-btn { min-height:44px; min-width:48px; }
+  .nw-chart-tabs { flex-wrap:wrap; }
+  .nw-chart-tab { flex:1; min-height:44px; padding:0 6px; }
+  .sec-pnl-bar { flex-wrap:wrap; }
+  .sec-pnl-item { flex:1 1 50%; border-bottom:1px solid var(--b1); }
+  .sec-pnl-item:nth-child(2n) { border-right:none; }
+  #metals-pnl-bar { margin:12px 16px 0 !important; }
+  .add-pos-fields, .pm-grid, .re-grid, .nw-grid { grid-template-columns:minmax(0,1fr); }
+  .nw-donut { grid-column:unset; }
+  .add-pos-submit, .add-pos-cancel, .import-btn, .login-btn { min-height:44px; padding:0 18px; }
+  .inv-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .import-body { padding:14px 16px 16px; }
+}
 </style>
 </head>
 <body>
 
-<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:100%"></div></div>
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <form class="login-card" id="loginForm" autocomplete="on" hidden>
+    <div class="login-title">Bestevaer Family Office</div>
+    <div class="login-sub">Log in om verder te gaan</div>
+    <label class="login-lbl" for="loginEmail">E-mailadres</label>
+    <input class="login-input" id="loginEmail" type="email" autocomplete="username" required>
+    <label class="login-lbl" for="loginPassword">Wachtwoord</label>
+    <input class="login-input" id="loginPassword" type="password" autocomplete="current-password" required>
+    <button class="login-btn" id="loginBtn" type="submit">Inloggen</button>
+    <div class="login-error" id="loginError" role="alert"></div>
+  </form>
+  <div class="login-wait" id="loginWait">Laden…</div>
+</div>
 
-<div class="app">
+<div class="progress-track" id="progressTrack" hidden><div class="progress-fill" id="progressFill" style="width:100%"></div></div>
+
+<div class="app" id="app" hidden>
 
   <header>
     <div>
@@ -312,7 +392,6 @@ footer { text-align:center; margin-top:20px; font-size:10px; color:var(--t3); li
       <div class="brand-sub" id="lastUpdated">Fetching live prices…</div>
     </div>
     <div class="header-right">
-      <button class="curr-toggle" id="exportBtn" onclick="exportForPhone()" title="Kopieer al je ingevulde gegevens om ze in de telefoonversie te plakken">Kopieer voor telefoon</button>
       <span class="eur-pill" id="eurPill">EUR/USD —</span>
       <button class="curr-toggle" id="currToggle" onclick="toggleCurrency()"><span class="curr-toggle-dot"></span><span id="currLabel">USD</span></button>
       <div class="live-pill loading" id="livePill"><span class="pulse"></span><span id="pillText">LOADING</span></div>
@@ -322,6 +401,7 @@ footer { text-align:center; margin-top:20px; font-size:10px; color:var(--t3); li
         <div class="toggle-track"><div class="toggle-thumb"></div></div>
         <svg class="icon-sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
+      <button class="logout-btn" id="logoutBtn" type="button">Uitloggen</button>
     </div>
   </header>
 
@@ -472,26 +552,44 @@ footer { text-align:center; margin-top:20px; font-size:10px; color:var(--t3); li
         <div class="re-cell">
           <div class="re-cell-title">Ibiza Villa</div>
           <div class="re-cell-sub">Spain</div>
-          <input class="re-input" id="re-IBIZA" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('IBIZA',this.value)">
+          <input class="re-input" id="re-IBIZA" data-k="re_IBIZA" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('IBIZA',this.value)">
         </div>
         <div class="re-cell">
           <div class="re-cell-title">Lenk</div>
           <div class="re-cell-sub">Switzerland</div>
-          <input class="re-input" id="re-LENK" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('LENK',this.value)">
+          <input class="re-input" id="re-LENK" data-k="re_LENK" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('LENK',this.value)">
         </div>
         <div class="re-cell">
           <div class="re-cell-title">Almendros</div>
           <div class="re-cell-sub">Spain</div>
-          <input class="re-input" id="re-ALMENDROS" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('ALMENDROS',this.value)">
+          <input class="re-input" id="re-ALMENDROS" data-k="re_ALMENDROS" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('ALMENDROS',this.value)">
         </div>
         <div class="re-cell">
           <div class="re-cell-title">Huisje NL</div>
           <div class="re-cell-sub">Netherlands</div>
-          <input class="re-input" id="re-HUISJENL" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('HUISJENL',this.value)">
+          <input class="re-input" id="re-HUISJENL" data-k="re_HUISJENL" type="number" min="0" step="1000" placeholder="€ 0" oninput="onReInput('HUISJENL',this.value)">
         </div>
         <div class="re-cell re-total-card">
           <div class="re-total-lbl">Total Real Estate</div>
           <div class="re-total-val" id="reTotal">€0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPORT -->
+  <div class="section" id="sec-import">
+    <div class="sec-hdr" onclick="toggleSection('import')">
+      <div class="sec-hdr-l"><span class="sec-title">Gegevens overzetten</span></div>
+      <div class="sec-hdr-r"><span class="chevron">▼</span></div>
+    </div>
+    <div class="sec-body" id="body-import">
+      <div class="import-body">
+        <p class="import-help">Plak hier de tekst van de knop "Kopieer voor telefoon" uit de laptopversie. De waarden worden in je account opgeslagen en verschijnen direct op al je apparaten.</p>
+        <textarea class="import-input" id="importText" rows="5" placeholder='{"bestevaer":1,"ls":{…}}' spellcheck="false" autocomplete="off"></textarea>
+        <div class="import-actions">
+          <button class="import-btn" type="button" onclick="importData()">Importeren</button>
+          <span class="import-status" id="importStatus"></span>
         </div>
       </div>
     </div>
@@ -527,9 +625,6 @@ const TV_SYMBOLS = {
 };
 const ALL_TICKERS = [...TICKERS, ...CRYPTO];
 
-const DEFAULT_SHARES = { HIMS:10500, DUOL:900, SOFI:2000 };
-const DEFAULT_ENTRY  = { HIMS:33.80, DUOL:201, SOFI:19.43 };
-
 const BANKS   = [{id:'UBS',label:'UBS'},{id:'ABNAMRO',label:'ABN AMRO'},{id:'SANTANDER',label:'Santander'},{id:'WISE',label:'Wise'}];
 const BROKERS = [{id:'BLOX',label:'Blox'},{id:'BITVAVO',label:'Bitvavo'},{id:'CRYPTOCOM',label:'Crypto.com'},{id:'SAXO',label:'Saxo'},{id:'IBKR',label:'IBKR'}];
 
@@ -552,22 +647,6 @@ let customStocks   = [];
 let customCrypto   = [];
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
-// ─── EXPORT FOR PHONE VERSION ────────────────────────────────────────────────
-function exportForPhone() {
-  const keep = /^(cash_|re_|shares_|entry_|pm_qty_|pm_unit_|pm_entry_|custom_stocks$|custom_crypto$)/;
-  const out = {};
-  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (keep.test(k)) out[k] = localStorage.getItem(k); }
-  const text = JSON.stringify({ bestevaer: 1, exported: new Date().toISOString(), ls: out });
-  const btn = document.getElementById('exportBtn');
-  const done = ok => { btn.textContent = ok ? 'Gekopieerd ✓' : 'Kopiëren mislukt'; setTimeout(() => btn.textContent = 'Kopieer voor telefoon', 2500); };
-  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(() => done(true), () => fallback());
-  else fallback();
-  function fallback() {
-    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
-    let ok = false; try { ok = document.execCommand('copy'); } catch {} ta.remove(); done(ok);
-  }
-}
-
 function toggleTheme() { const l = document.body.classList.toggle('light'); localStorage.setItem('theme', l?'light':'dark'); }
 if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
 
@@ -619,8 +698,40 @@ function usdToDisp(n) { return displayMode === 'eur' ? n / eurUsd : n; }
 // Convert raw EUR amount → display currency (cash, RE, crypto entries are stored in EUR)
 function eurToDisp(n) { return displayMode === 'eur' ? n : n * eurUsd; }
 
-// ─── LOCALSTORAGE ─────────────────────────────────────────────────────────────
-const ls = { get: k => localStorage.getItem(k), set: (k,v) => localStorage.setItem(k,v), del: k => localStorage.removeItem(k), num: k => { const v = localStorage.getItem(k); return v != null ? parseFloat(v) : null; } };
+// ─── STORAGE ──────────────────────────────────────────────────────────────────
+// Portfolio data lives in Firestore (users/{uid}/data/portfolio, field "data"); the module
+// script at the bottom loads it and registers the save hook. Display settings stay in localStorage.
+const PORTFOLIO_KEY = /^(cash_|re_|shares_|entry_|pm_qty_|pm_unit_|pm_entry_|note_|custom_stocks$|custom_crypto$|nw_history$)/;
+let portfolio = {};
+const dirtyKeys = new Set();
+let saveTimer = null;
+const store = {
+  persist: null,   // set by the Firebase module: (changes: {key: string|null}) => Promise
+  schedule() { clearTimeout(saveTimer); saveTimer = setTimeout(() => store.flush(), 500); },
+  flush() {
+    clearTimeout(saveTimer); saveTimer = null;
+    if (!dirtyKeys.size || !store.persist) return Promise.resolve();
+    const changes = {};
+    dirtyKeys.forEach(k => changes[k] = k in portfolio ? portfolio[k] : null);
+    dirtyKeys.clear();
+    return store.persist(changes).catch(e => { console.error('Opslaan mislukt', e); Object.keys(changes).forEach(k => dirtyKeys.add(k)); store.schedule(); });
+  },
+  // Remote snapshot: keep local edits that haven't been sent yet
+  merge(remote) {
+    const next = { ...remote };
+    dirtyKeys.forEach(k => { if (k in portfolio) next[k] = portfolio[k]; else delete next[k]; });
+    const changed = JSON.stringify(next) !== JSON.stringify(portfolio);
+    portfolio = next;
+    return changed;
+  },
+};
+const ls = {
+  get: k => PORTFOLIO_KEY.test(k) ? (k in portfolio ? portfolio[k] : null) : localStorage.getItem(k),
+  set: (k,v) => { if (PORTFOLIO_KEY.test(k)) { portfolio[k] = String(v); dirtyKeys.add(k); store.schedule(); } else localStorage.setItem(k,v); },
+  del: k => { if (PORTFOLIO_KEY.test(k)) { if (k in portfolio) { delete portfolio[k]; dirtyKeys.add(k); store.schedule(); } } else localStorage.removeItem(k); },
+  num: k => { const v = ls.get(k); return v != null ? parseFloat(v) : null; }
+};
+window.addEventListener('pagehide', () => store.flush());
 
 // ─── CASH ────────────────────────────────────────────────────────────────────
 function getCash(id)  { return ls.num('cash_'+id) || 0; }
@@ -806,11 +917,11 @@ function initMetals() {
           <button id="pm-btn-${id}-oz" class="unit-btn${unit==='oz'?' active':''}" onclick="setMetalUnit('${id}','oz')">oz</button>
           <button id="pm-btn-${id}-kg" class="unit-btn${unit==='kg'?' active':''}" onclick="setMetalUnit('${id}','kg')">kg</button>
         </div>
-        <input class="pm-qty-input" id="pm-qty-${id}" type="number" min="0" step="any" placeholder="0" value="${qty??''}" oninput="onMetalQtyInput('${id}',this.value)">
+        <input class="pm-qty-input" id="pm-qty-${id}" type="number" min="0" step="any" placeholder="0" value="${qty??''}" data-k="pm_qty_${id}" oninput="onMetalQtyInput('${id}',this.value)">
       </div>
       <div class="pm-entry-row">
         <span class="pm-entry-lbl">Avg Entry (€/kg)</span>
-        <input class="pm-entry-input" id="pm-entry-${id}" type="number" min="0" step="any" placeholder="€0.00" value="${entry??''}" oninput="onMetalEntryInput('${id}',this.value)">
+        <input class="pm-entry-input" id="pm-entry-${id}" type="number" min="0" step="any" placeholder="€0.00" value="${entry??''}" data-k="pm_entry_${id}" oninput="onMetalEntryInput('${id}',this.value)">
       </div>
       <div class="pm-pnl" id="pm-pnl-${id}"></div>
       <div class="pm-pnl" id="pm-daily-pnl-${id}"></div>
@@ -1100,11 +1211,11 @@ function toggleSection(id) {
 function initCash() {
   document.getElementById('bankRows').innerHTML = BANKS.map(b => {
     const v = ls.num('cash_'+b.id);
-    return `<div class="cash-row"><span class="cash-name">${b.label}</span><input class="cash-input" type="number" min="0" step="100" placeholder="€ 0" value="${v??''}" oninput="onCashInput('${b.id}',this.value)"></div>`;
+    return `<div class="cash-row"><span class="cash-name">${b.label}</span><input class="cash-input" type="number" min="0" step="100" placeholder="€ 0" value="${v??''}" data-k="cash_${b.id}" oninput="onCashInput('${b.id}',this.value)"></div>`;
   }).join('');
   document.getElementById('brokerRows').innerHTML = BROKERS.map(b => {
     const v = ls.num('cash_'+b.id);
-    return `<div class="cash-row"><span class="cash-name">${b.label}</span><input class="cash-input" type="number" min="0" step="100" placeholder="€ 0" value="${v??''}" oninput="onCashInput('${b.id}',this.value)"></div>`;
+    return `<div class="cash-row"><span class="cash-name">${b.label}</span><input class="cash-input" type="number" min="0" step="100" placeholder="€ 0" value="${v??''}" data-k="cash_${b.id}" oninput="onCashInput('${b.id}',this.value)"></div>`;
   }).join('');
 }
 
@@ -1122,12 +1233,12 @@ function makeInvRow(sym, name, isCrypto) {
     </div>
     <div class="inv-r2">
       <span class="inv-qty-lbl">${isCrypto?'Coins':'Shares'}</span>
-      <input class="inv-qty-input" type="number" min="0" step="any" placeholder="0" value="${qty??''}" oninput="onSharesInput('${sym}',this.value)">
+      <input class="inv-qty-input" type="number" min="0" step="any" placeholder="0" value="${qty??''}" data-k="shares_${sym}" oninput="onSharesInput('${sym}',this.value)">
       <span class="inv-posval sk" id="invposval-${sym}">€0</span>
     </div>
     <div class="inv-r3">
       <span class="inv-entry-lbl">${isCrypto ? 'Avg Entry (€)' : 'Avg Entry ($)'}</span>
-      <input class="inv-entry-input" type="number" min="0" step="any" placeholder="${isCrypto ? '€0.00' : '$0.00'}" value="${entry??''}" oninput="onEntryInput('${sym}',this.value)">
+      <input class="inv-entry-input" type="number" min="0" step="any" placeholder="${isCrypto ? '€0.00' : '$0.00'}" value="${entry??''}" data-k="entry_${sym}" oninput="onEntryInput('${sym}',this.value)">
       <span class="inv-pnl" id="invpnl-${sym}"></span>
     </div>
   </div>`;
@@ -1140,6 +1251,7 @@ function initInvestments() {
 
 // ─── ADD POSITION ─────────────────────────────────────────────────────────────
 function loadCustomStocks() {
+  const added = [];
   const saved = JSON.parse(ls.get('custom_stocks') || '[]');
   saved.forEach(s => {
     if (!TICKERS.includes(s.ticker)) {
@@ -1147,6 +1259,7 @@ function loadCustomStocks() {
       NAMES[s.ticker] = s.name || s.ticker;
       ALL_TICKERS.push(s.ticker);
       customStocks.push(s);
+      added.push({ sym: s.ticker, name: NAMES[s.ticker], isCrypto: false });
     }
   });
   const savedC = JSON.parse(ls.get('custom_crypto') || '[]');
@@ -1158,8 +1271,10 @@ function loadCustomStocks() {
       TV_SYMBOLS[c.ticker]     = (c.symbol || '').startsWith('CG:') ? 'CRYPTO:' + (c.base || c.ticker) + 'USD' : (c.symbol || ('BINANCE:' + c.ticker + 'USDT'));
       ALL_TICKERS.push(c.ticker);
       customCrypto.push(c);
+      added.push({ sym: c.ticker, name: CRYPTO_NAMES[c.ticker], isCrypto: true });
     }
   });
+  return added;
 }
 
 function showAddForm() {
@@ -1422,7 +1537,7 @@ function renderDetail(sym, isCrypto, data) {
     </div>
     <div class="inv-notes">
       <div class="inv-stat-lbl" style="margin-bottom:5px">Notes</div>
-      <textarea class="inv-note-input" placeholder="Add a note…" oninput="saveNote('${sym}',this.value)">${note}</textarea>
+      <textarea class="inv-note-input" placeholder="Add a note…" data-k="note_${sym}" oninput="saveNote('${sym}',this.value)">${note}</textarea>
     </div>`;
 }
 
@@ -1716,12 +1831,14 @@ function drawNwChart() {
     nwGeom = null;
     if (chgEl) { chgEl.textContent = ''; }
     ctx.fillStyle = textCol; ctx.font = font(12); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(
-      nwChartFilter === '1d'
+    const msg = nwChartFilter === '1d'
         ? 'Nog te weinig punten vandaag — de 1D-lijn groeit terwijl het dashboard openstaat'
         : pts.length === 0 ? 'Nog geen historie — elke dag dat je het dashboard opent komt er een punt bij'
-                           : 'Eén punt opgeslagen — morgen verschijnt de lijn',
-      W / 2, H / 2);
+                           : 'Eén punt opgeslagen — morgen verschijnt de lijn';
+    // Wrap onto several lines on narrow screens
+    const lines = [];
+    msg.split(' ').forEach(w => { const l = lines.length - 1; if (l >= 0 && ctx.measureText(lines[l] + ' ' + w).width <= W - 24) lines[l] += ' ' + w; else lines.push(w); });
+    lines.forEach((l, i) => ctx.fillText(l, W / 2, H / 2 + (i - (lines.length - 1) / 2) * 18));
     return;
   }
 
@@ -2031,34 +2148,159 @@ async function refresh() {
   rTimer = setTimeout(refresh, REFRESH * 1000);
 }
 
+// ─── SYNC FROM FIRESTORE ─────────────────────────────────────────────────────
+// Push the current portfolio into rows/inputs that already exist (remote change or import)
+function applyPortfolioToUI() {
+  const added = loadCustomStocks();
+  added.forEach(a => document.getElementById(a.isCrypto ? 'cryptoTable' : 'stocksTable').insertAdjacentHTML('beforeend', makeInvRow(a.sym, a.name, a.isCrypto)));
+  if (added.length) updatePositionsBadge();
+  document.querySelectorAll('[data-k]').forEach(el => {
+    if (el === document.activeElement) return;
+    const v = ls.get(el.dataset.k) ?? '';
+    if (el.value !== v) el.value = v;
+  });
+  METALS.forEach(id => {
+    const unit = ls.get('pm_unit_'+id) || 'oz';
+    ['oz','kg'].forEach(u => { const b = document.getElementById('pm-btn-'+id+'-'+u); if (b) b.className = 'unit-btn' + (u === unit ? ' active' : ''); });
+  });
+  ALL_TICKERS.forEach(t => { const i = document.getElementById('noteicon-'+t); if (i) i.style.display = ls.get('note_'+t) ? 'inline' : 'none'; });
+  refreshAllDisplays();
+  if (added.length && booted) refresh();
+}
+
+// ─── IMPORT ──────────────────────────────────────────────────────────────────
+async function importData() {
+  const ta = document.getElementById('importText'), st = document.getElementById('importStatus');
+  let n = 0;
+  try {
+    const j = JSON.parse(ta.value);
+    if (!j || j.bestevaer !== 1 || typeof j.ls !== 'object' || !j.ls) throw new Error('format');
+    for (const [k, v] of Object.entries(j.ls)) if (PORTFOLIO_KEY.test(k) && v != null) { ls.set(k, v); n++; }
+  } catch {
+    st.textContent = 'Ongeldige gegevens. Plak de volledige tekst van "Kopieer voor telefoon".'; st.className = 'import-status r';
+    return;
+  }
+  if (!n) { st.textContent = 'Geen gegevens gevonden om te importeren.'; st.className = 'import-status r'; return; }
+  st.textContent = 'Bezig met opslaan…'; st.className = 'import-status';
+  await store.flush();
+  applyPortfolioToUI();
+  ta.value = '';
+  st.textContent = n + ' waarden geïmporteerd en opgeslagen.'; st.className = 'import-status g';
+}
+
 // ─── BOOT ────────────────────────────────────────────────────────────────────
-for (const [t, qty] of Object.entries(DEFAULT_SHARES)) if (ls.num('shares_'+t) === null) ls.set('shares_'+t, qty);
-for (const [t, p]   of Object.entries(DEFAULT_ENTRY))  if (ls.num('entry_'+t)  === null) ls.set('entry_'+t, p);
-if (ls.num('re_ALMENDROS') === null) ls.set('re_ALMENDROS', 400000);
+// Called by the Firebase module once the portfolio document has been loaded
+let booted = false;
+function bootDashboard() {
+  if (booted) return;
+  booted = true;
 
-priceMetalUSD.GOLD   = 4350;   // overwritten by fetchMetals() on first refresh
-priceMetalUSD.SILVER = 72;
-if (ls.num('pm_qty_GOLD')   === null) { ls.set('pm_qty_GOLD',   8.5); ls.set('pm_unit_GOLD',   'kg'); }
-if (ls.num('pm_qty_SILVER') === null) { ls.set('pm_qty_SILVER', 230); ls.set('pm_unit_SILVER', 'kg'); }
+  priceMetalUSD.GOLD   = 4350;   // overwritten by fetchMetals() on first refresh
+  priceMetalUSD.SILVER = 72;
 
-['nwchart','cash','investments','metals','realestate'].forEach(id => {
-  // Always start collapsed
-  const sec = document.getElementById('sec-'+id), body = document.getElementById('body-'+id);
-  if (sec && body) { sec.classList.add('collapsed'); body.style.maxHeight = '0'; body.style.opacity = '0'; }
+  ['nwchart','cash','investments','metals','realestate','import'].forEach(id => {
+    // Always start collapsed
+    const sec = document.getElementById('sec-'+id), body = document.getElementById('body-'+id);
+    if (sec && body) { sec.classList.add('collapsed'); body.style.maxHeight = '0'; body.style.opacity = '0'; }
+  });
+
+  syncCurrToggle();
+  initCash();
+  loadCustomStocks();
+  updatePositionsBadge();
+  initInvestments();
+  initRe();
+  initMetals();
+  updateCashTotals();
+  updateReTotals();
+  updateMetalTotals();
+  updateNetWorth();
+  requestAnimationFrame(drawNwChart);
+  refresh();
+}
+</script>
+<script>
+// If the Firebase SDK can't be loaded the login form never appears; say so instead of loading forever
+setTimeout(() => {
+  const w = document.getElementById('loginWait');
+  if (!booted && !w.hidden && document.getElementById('loginForm').hidden && w.textContent === 'Laden…') w.textContent = 'Kan geen verbinding maken. Controleer je internet en herlaad de pagina.';
+}, 20000);
+</script>
+<script type="module">
+import { firebaseConfig } from './firebase-config.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, doc, onSnapshot, setDoc, deleteField, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const $ = id => document.getElementById(id);
+
+const LOGIN_ERRORS = {
+  'auth/invalid-credential': 'Onjuist e-mailadres of wachtwoord.',
+  'auth/invalid-email': 'Ongeldig e-mailadres.',
+  'auth/user-disabled': 'Dit account is uitgeschakeld.',
+  'auth/too-many-requests': 'Te veel pogingen. Probeer het later opnieuw.',
+  'auth/network-request-failed': 'Geen verbinding. Controleer je internet.',
+};
+
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  $('loginError').textContent = '';
+  $('loginBtn').disabled = true;
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+    await signInWithEmailAndPassword(auth, $('loginEmail').value.trim(), $('loginPassword').value);
+  } catch (err) {
+    $('loginError').textContent = LOGIN_ERRORS[err.code] || 'Inloggen mislukt.';
+    $('loginBtn').disabled = false;
+  }
 });
 
-syncCurrToggle();
-initCash();
-loadCustomStocks();
-initInvestments();
-initRe();
-initMetals();
-updateCashTotals();
-updateReTotals();
-updateMetalTotals();
-updateNetWorth();
-requestAnimationFrame(drawNwChart);
-refresh();
+$('logoutBtn').addEventListener('click', async () => {
+  await store.flush();
+  // Remove locally cached net-worth curves from this device
+  ['nw_backfill','nw_backfill_intra','nw_backfill_anchor','nw_backfill_sig','nw_backfill_start','nw_backfill_ts','nw_intraday'].forEach(k => localStorage.removeItem(k));
+  await signOut(auth);
+});
+
+let currentUid = null;
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    // Logged out (or never logged in): drop all data from memory by reloading into the login screen
+    if (currentUid) { location.reload(); return; }
+    $('loginWait').hidden = true;
+    $('loginForm').hidden = false;
+    $('loginBtn').disabled = false;
+    return;
+  }
+  currentUid = user.uid;
+  $('loginForm').hidden = true;
+  $('loginWait').hidden = false;
+  $('loginWait').textContent = 'Gegevens laden…';
+
+  const ref = doc(db, 'users', user.uid, 'data', 'portfolio');
+  store.persist = changes => {
+    const data = {};
+    for (const [k, v] of Object.entries(changes)) data[k] = v == null ? deleteField() : v;
+    return setDoc(ref, { data, updatedAt: serverTimestamp() }, { merge: true });
+  };
+  onSnapshot(ref, snap => {
+    const changed = store.merge(snap.data()?.data || {});
+    if (!booted) {
+      $('loginScreen').hidden = true;
+      $('app').hidden = false;
+      $('progressTrack').hidden = false;
+      bootDashboard();
+    } else if (changed) {
+      applyPortfolioToUI();
+    }
+  }, err => {
+    console.error(err);
+    $('loginWait').textContent = 'Kon gegevens niet laden: ' + (err.code || err.message);
+  });
+});
 </script>
 </body>
 </html>
