@@ -15,7 +15,7 @@
   --t1:     #e6edf3; --t2: #8b949e; --t3: #6e7681;
   --green:  #3fb950; --green-dim: rgba(63,185,80,0.15);
   --red:    #f85149; --red-dim:   rgba(248,81,73,0.15);
-  --blue:   #58a6ff; --purple: #bc8cff; --amber: #e3b341; --teal: #39d353; --gold: #d4af37;
+  --blue:   #58a6ff; --purple: #bc8cff; --amber: #e3b341; --teal: #39d353; --gold: #d4af37; --orange: #f0883e;
   --r: 10px; --shadow: rgba(0,0,0,0.5);
 }
 body.light {
@@ -24,7 +24,7 @@ body.light {
   --t1: #1f2328; --t2: #59636e; --t3: #818b98;
   --green: #1a7f37; --green-dim: rgba(26,127,55,0.1);
   --red: #d1242f;   --red-dim:   rgba(209,36,47,0.1);
-  --blue: #0969da; --purple: #8250df; --amber: #9a6700; --teal: #2da44e; --gold: #b8860b;
+  --blue: #0969da; --purple: #8250df; --amber: #9a6700; --teal: #2da44e; --gold: #b8860b; --orange: #bc4c00;
   --shadow: rgba(0,0,0,0.1);
 }
 
@@ -203,6 +203,17 @@ body.light .unit-btn.active { color:#fff; }
 .pm-grand-val { font-size:24px; font-weight:900; color:var(--gold); font-variant-numeric:tabular-nums; letter-spacing:-1px; }
 .pm-grand-pnl { font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; margin-top:8px; }
 .pm-grand-pnl.g { color:var(--green); } .pm-grand-pnl.r { color:var(--red); }
+
+/* Position weight */
+.inv-weight { display:flex; align-items:center; gap:10px; margin-top:6px; }
+.inv-weight-bar { flex:1; min-width:0; height:4px; background:var(--s3); border-radius:2px; overflow:hidden; }
+.inv-weight-fill { height:100%; width:0; background:var(--teal); border-radius:2px; transition:width .4s ease; }
+#cryptoTable .inv-weight-fill { background:var(--purple); }
+.inv-weight-txt { flex-shrink:0; min-width:78px; text-align:right; line-height:1.25; font-variant-numeric:tabular-nums; }
+.inv-weight-pct { display:block; font-size:12px; font-weight:800; color:var(--t1); }
+.inv-weight-tot { display:block; font-size:9.5px; font-weight:600; color:var(--t3); }
+.inv-weight.conc .inv-weight-pct { color:var(--orange); }
+.inv-weight.conc .inv-weight-fill { background:var(--orange) !important; }
 
 /* Row expand */
 .inv-r1 { cursor:pointer; border-radius:4px; transition:background .15s; margin-bottom:0; }
@@ -1101,6 +1112,8 @@ function updateNetWorth() {
 
   const nw = cash + stocks + crypto + re + metals;
   document.getElementById('nwTotal').textContent = nw > 0 ? fmtAmt(nw) : '—';
+  updateWeights('stocksTable', TICKERS, stocks, nw);
+  updateWeights('cryptoTable', CRYPTO, crypto, nw);
 
   // Today P&L — day change in USD, convert to display; metals added when API provides change
   let todayAmt = 0, todayCnt = 0;
@@ -1168,6 +1181,43 @@ function updateNetWorth() {
   ]);
 }
 
+// ─── POSITION WEIGHTS ─────────────────────────────────────────────────────────
+// Weight of each position within its class (stocks / crypto) and of total net worth,
+// all in display currency. Rows are sorted by weight; positions without quantity go last.
+const CONC_LIMIT = 25;   // % of class above which a position is flagged as concentrated
+const fmtWeight = n => n.toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+
+function updateWeights(tableId, syms, classTotal, nwTotal) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const rank = [];
+  syms.forEach(t => {
+    const q = getShares(t), p = priceUSD[t];
+    const val = q > 0 && p != null ? q * usdToDisp(p) : null;
+    rank.push({ t, held: q > 0, val });
+    const el = document.getElementById('invweight-' + t);
+    if (!el) return;
+    if (!(q > 0)) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    const pctClass = val != null && classTotal > 0 ? val / classTotal * 100 : null;
+    const pctNw    = val != null && nwTotal > 0    ? val / nwTotal * 100    : null;
+    el.querySelector('.inv-weight-pct').textContent = pctClass != null ? fmtWeight(pctClass) : '—';
+    el.querySelector('.inv-weight-tot').textContent = pctNw != null ? fmtWeight(pctNw) + ' van totaal' : '';
+    el.querySelector('.inv-weight-fill').style.width = (pctClass ?? 0) + '%';
+    el.classList.toggle('conc', pctClass != null && pctClass > CONC_LIMIT);
+  });
+
+  // Don't move rows while one is open (its chart iframe would reload) or being edited
+  if (expandedSym && syms.includes(expandedSym)) return;
+  if (table.contains(document.activeElement)) return;
+  const tier = r => r.val != null ? 0 : r.held ? 1 : 2;   // priced → held but no price → not held
+  rank.sort((a, b) => tier(a) - tier(b) || (b.val ?? 0) - (a.val ?? 0) || syms.indexOf(a.t) - syms.indexOf(b.t));
+  const rows = rank.map(r => document.getElementById('invrow-' + r.t)).filter(Boolean);
+  const current = [...table.children].filter(c => c.classList.contains('inv-row'));
+  if (rows.every((r, i) => current[i] === r)) return;
+  rows.forEach(r => table.appendChild(r));
+}
+
 function updateDonut(segs) {
   const r = 54, cx = 70, cy = 70, circ = 2 * Math.PI * r;
   const total = segs.reduce((s, x) => s + x.value, 0);
@@ -1230,6 +1280,10 @@ function makeInvRow(sym, name, isCrypto) {
       <span class="inv-badge sk" id="invbadge-${sym}">+0.00%</span>
       <span class="inv-note-icon" id="noteicon-${sym}"${hasNote ? '' : ' style="display:none"'}>✎</span>
       <span class="inv-expand-icon">▶</span>
+    </div>
+    <div class="inv-weight" id="invweight-${sym}" style="display:none">
+      <div class="inv-weight-bar"><div class="inv-weight-fill"></div></div>
+      <div class="inv-weight-txt"><span class="inv-weight-pct">—</span><span class="inv-weight-tot"></span></div>
     </div>
     <div class="inv-r2">
       <span class="inv-qty-lbl">${isCrypto?'Coins':'Shares'}</span>
@@ -1594,6 +1648,7 @@ async function toggleDetail(sym, isCrypto) {
     existing.addEventListener('transitionend', () => existing.remove(), { once: true });
     row.classList.remove('row-expanded');
     expandedSym = null;
+    existing.addEventListener('transitionend', () => updateNetWorth(), { once: true });
     return;
   }
 
@@ -2215,6 +2270,9 @@ function bootDashboard() {
   updateReTotals();
   updateMetalTotals();
   updateNetWorth();
+  ['stocksTable','cryptoTable'].forEach(id => document.getElementById(id).addEventListener('focusout', () => setTimeout(() => {
+    if (!document.getElementById(id).contains(document.activeElement)) updateNetWorth();
+  })));
   requestAnimationFrame(drawNwChart);
   refresh();
 }
